@@ -2,7 +2,7 @@
 <html lang="uk">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Магічне створення портрета</title>
   <style>
     body {
@@ -15,6 +15,7 @@
       justify-content: center;
       height: 80vh;
       overflow: hidden;
+      position: relative;
     }
 
     h1 {
@@ -62,6 +63,21 @@
       z-index: 1;
       pointer-events: none;
     }
+
+    #finalText {
+      margin-top: 20px;
+      font-size: 32px;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      user-select: none;
+    }
+
+    #finalText.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -74,6 +90,8 @@
   <!-- 🎵 Аудіо -->
   <audio id="bgMusic" src="./Mandy_Moore_-_Only_Hope.mp3" preload="auto"></audio>
 
+  <div id="finalText">Завжди посміхайся 😊</div>
+
   <script>
     const music = document.getElementById("bgMusic");
     music.volume = 0.3;
@@ -85,7 +103,7 @@
           setTimeout(() => {
             music.pause();
             music.currentTime = 0;
-          }, 25000); // Зупинити через 30 секунд
+          }, 25000); // Зупинити через 25 секунд
         }).catch(() => { /* Браузер заблокував – нічого не робимо */ });
 
         musicStarted = true;
@@ -140,6 +158,10 @@
     }
 
     function startDrawing() {
+      // Сховати текст, якщо він був раніше
+      const finalText = document.getElementById('finalText');
+      finalText.classList.remove('visible');
+
       canvas.classList.add("visible");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       shuffleArray(positions);
@@ -149,6 +171,8 @@
         if (i >= positions.length) {
           clearInterval(interval);
           triggerFireworks();
+          // Показати текст
+          finalText.classList.add('visible');
           return;
         }
 
