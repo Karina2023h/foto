@@ -26,7 +26,7 @@
       margin-top: 25px;
       margin-bottom: 15px;
       padding: 32px 23px;
-      font-size: 64px;
+      font-size: 58px;
       background: linear-gradient(135deg, #ff7e5f, #feb47b);
       border: none;
       border-radius: 80px;
@@ -68,7 +68,7 @@
 <body>
   <button>✨ Натисни на мене ✨</button>
   <button onclick="startDrawing()">✨ А тепер на мене ✨</button>
-  <canvas id="canvas" width="800" height="800"></canvas>
+  <canvas id="canvas" width="850" height="850"></canvas>
   <div id="particles"></div>
 
   <!-- 🎵 Аудіо -->
@@ -85,7 +85,7 @@
           setTimeout(() => {
             music.pause();
             music.currentTime = 0;
-          }, 30000); // Зупинити через 20 секунд
+          }, 25000); // Зупинити через 30 секунд
         }).catch(() => { /* Браузер заблокував – нічого не робимо */ });
 
         musicStarted = true;
@@ -102,7 +102,7 @@
     const img = new Image();
     img.src = './photo_2025-05-22_19-34-44.jpg'; // заміни на свій файл
 
-    const step = 30;
+    const step = 32;
     const positions = [];
 
     let drawOffsetX = 0;
@@ -173,6 +173,11 @@
 
     function triggerFireworks() {
       const container = document.getElementById('particles');
+      const canvasRect = canvas.getBoundingClientRect();
+
+      const centerX = canvasRect.left + canvasRect.width / 2;
+      const centerY = canvasRect.top + canvasRect.height / 2;
+
       for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
@@ -180,8 +185,11 @@
         particle.style.height = '10px';
         particle.style.borderRadius = '50%';
         particle.style.background = randomColor();
-        particle.style.left = Math.random() * window.innerWidth + 'px';
-        particle.style.top = canvas.getBoundingClientRect().top + canvas.height / 2 + 'px';
+
+        // Позиція по центру канваса
+        particle.style.left = centerX + 'px';
+        particle.style.top = centerY + 'px';
+
         particle.style.opacity = '0.8';
         particle.style.transition = 'transform 1s ease-out, opacity 1.2s ease-out';
         container.appendChild(particle);
