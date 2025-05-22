@@ -2,82 +2,64 @@
 <html lang="uk">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Магічне створення портрета</title>
   <style>
-    /* За замовчуванням ховаємо весь вміст */
-    body>* {
-      display: none;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    /* Для мобільних пристроїв: ширина екрану максимум 600px */
-    @media (max-width: 600px) {
-      body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #fdf6f0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        overflow: hidden;
-      }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
 
-      body>* {
-        display: block;
-        /* показуємо всі безпосередні діти body */
-        position: relative;
-        z-index: auto;
-      }
+    button {
+      margin-top: 45px;
+      padding: 17px 25px;
+      font-size: 21px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+    }
 
-      h1 {
-        color: #333;
-        margin-bottom: 10px;
-      }
+    button:hover {
+      transform: scale(1.05);
+    }
 
-      button {
-        padding: 17px 25px;
-        font-size: 21px;
-        background: linear-gradient(135deg, #ff7e5f, #feb47b);
-        border: none;
-        border-radius: 30px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        z-index: 2;
-        margin: 8px 0;
-      }
+    canvas {
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
 
-      button:hover {
-        transform: scale(1.05);
-      }
+    .visible {
+      opacity: 1;
+    }
 
-      canvas {
-        margin-top: 20px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        background-color: #fff;
-        opacity: 0;
-        transition: opacity 1s ease;
-        max-width: 90vw;
-        height: auto;
-        display: block;
-      }
-
-      .visible {
-        opacity: 1;
-      }
-
-      #particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-      }
+    #particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -102,7 +84,7 @@
           setTimeout(() => {
             music.pause();
             music.currentTime = 0;
-          }, 30000); // Зупинити через 30 секунд
+          }, 30000); // Зупинити через 20 секунд
         }).catch(() => { /* Браузер заблокував – нічого не робимо */ });
 
         musicStarted = true;
@@ -217,6 +199,7 @@
       return colors[Math.floor(Math.random() * colors.length)];
     }
   </script>
+
 </body>
 
 </html>
